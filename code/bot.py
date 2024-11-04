@@ -9,11 +9,16 @@ API_ID = int(os.getenv('API_ID'))
 API_HASH = os.getenv('API_HASH')
 BOT_TOKEN = os.getenv('BOT_TOKEN')
 
-app = Client("SLONbot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
-pytgcalls = PyTgCalls(app)
+app = Client(
+    "SLONbot",
+    api_id=API_ID,
+    api_hash=API_HASH,
+    bot_token=BOT_TOKEN)
 
-handle_play(app, pytgcalls)
-handle_stop(app, pytgcalls)
+call_py = PyTgCalls(app)
 
-pytgcalls.start()
-app.run()
+handle_play(app, call_py)
+handle_stop(app, call_py)
+
+call_py.start()
+idle()
