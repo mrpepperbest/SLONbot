@@ -1,6 +1,7 @@
 import logging
 from yt_dlp import YoutubeDL
 
+
 def get_youtube_audio_url(track_name):
     ydl_opts = {'format': 'bestaudio', 'noplaylist': True}
     with YoutubeDL(ydl_opts) as ydl:

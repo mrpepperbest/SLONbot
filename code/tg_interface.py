@@ -8,17 +8,20 @@ from music_interface import get_youtube_audio_url
 current_track = None
 idle_timer = None
 
+
 async def check_idle(chat_id, call_py):
     await asyncio.sleep(600)
     if not current_track:
         await call_py.leave_call(chat_id)
-        print("Бот вышел из звонка после 10 минут простоя")
+        print("Bot left the call after 10 min AFK.")
+
 
 def reset_idle_timer(chat_id, call_py):
     global idle_timer
     if idle_timer:
         idle_timer.cancel()
     idle_timer = asyncio.create_task(check_idle(chat_id, call_py))
+
 
 def setup_handlers(app: Client, call_py: PyTgCalls):
     @app.on_message(filters.command("play"))
