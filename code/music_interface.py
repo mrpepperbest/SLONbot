@@ -8,5 +8,5 @@ def get_youtube_audio_url(track_name):
             info_dict = ydl.extract_info(f"ytsearch:{track_name}", download=False)['entries'][0]
             return info_dict['url'], info_dict['title']
         except Exception as e:
-            logging.error(f"Не удалось найти или загрузить аудио: {e}")
+            logging.error(f"Unable to find or download the track: {e}")
             return None, None
