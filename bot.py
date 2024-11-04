@@ -2,10 +2,8 @@ import logging
 import os
 from dotenv import load_dotenv
 from pyrogram import Client, filters
-from pytgcalls import PyTgCalls
+from pytgcalls import PyTgCalls, idle
 from yt_dlp import YoutubeDL
-from pytgcalls.types import Update
-from pytgcalls.types.stream import StreamAudioEnded
 
 load_dotenv()
 
@@ -41,13 +39,6 @@ async def start_stream(chat_id, track_name):
     else:
         return None
 
-@pytgcalls.on_stream_end()
-async def on_stream_end(update: Update):
-    if isinstance(update, StreamAudioEnded):
-        global current_track
-        current_track = None
-        print("Аудио завершилось")
-
 @app.on_message(filters.command("play"))
 async def play(client, message):
     chat_id = message.chat.id
@@ -70,4 +61,5 @@ async def stop(client, message):
     await message.reply("Воспроизведение остановлено.")
 
 app.start()
-pytgcalls.run()
+pytgcalls.start()
+idle()
