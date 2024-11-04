@@ -24,6 +24,10 @@ def reset_idle_timer(chat_id, call_py):
 
 
 def setup_handlers(app: Client, call_py: PyTgCalls):
+    @app.on_message(filters.command("start"))
+    async def start_handler(client, message: Message):
+        await message.reply("Hello! The bot is running and ready to receive commands.")
+    
     @app.on_message(filters.command("play"))
     async def play_handler(client, message: Message):
         global current_track
